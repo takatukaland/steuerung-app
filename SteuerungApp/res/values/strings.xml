@@ -1,8 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SteuerungApp</string>
+    <string name="app_name">LohmisAThome</string>
+    <string name="web_service_url">http://192.168.90.22/steuerungv2/webinterface.php</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="lbl_relay01">Relay 01</string>
+    <string name="dbname">steuerung</string>
+    <string-array name="createTables">
+        <item>
+	        DROP TABLE IF EXISTS steuerungen
+		</item>
+		<item>
+	        CREATE TABLE IF NOT EXISTS steuerungen (
+	  			id        integer primary key,
+	  			classname text    NOT NULL,
+	  			name      text    NOT NULL,
+	  			ip        text    NOT NULL,
+	  			aktiv     integer NOT NULL DEFAULT 1
+			)
+		</item>
+        <item>
+	        DROP TABLE IF EXISTS relays
+		</item>
+		<item>
+	        CREATE TABLE IF NOT EXISTS relays (
+				steuerung integer,
+				relay     integer,
+				ausgang   integer NOT NULL,
+				eingang   integer NOT NULL,
+				led       integer NOT NULL,
+				status    integer NOT NULL DEFAULT 0,
+				aktiv     integer NOT NULL DEFAULT 1,
+				name      text    NOT NULL,
+				classname text    NOT NULL,
+			FOREIGN KEY(steuerung) REFERENCES steuerungen(id),
+			PRIMARY KEY (steuerung, relay)
+			)
+		</item>
+        <item>
+			CREATE TABLE IF NOT EXISTS schaltzeiten (
+				id      integer primary key,
+				type     integer NOT NULL DEFAULT 1,
+				modus    integer NOT NULL DEFAULT 0,            
+				zeit     time             DEFAULT NULL,         
+				zeitdiff time    NOT NULL DEFAULT \'00:00:00\', 
+				aktiv    integer NOT NULL DEFAULT 1
+			)
+		</item>
+        <item>
+			CREATE TABLE IF NOT EXISTS relayschaltzeiten (
+				steuerung  integer,
+				relay      integer,
+				schaltzeit integer,
+				aktiv      integer NOT NULL DEFAULT 1,
+			FOREIGN KEY(steuerung, relay) REFERENCES relays(steuerung, relay),
+			FOREIGN KEY(schaltzeit) REFERENCES schaltzeiten(id),
+			PRIMARY KEY (steuerung, relay, schaltzeit)
+			)
+		</item>
+    </string-array>
+    <string name="version">1</string>
 
 </resources>
