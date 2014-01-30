@@ -15,6 +15,7 @@ public class Relays {
 	boolean aktiv;
 	String name;
 	String classname;
+	RelaySchaltzeiten[] relayschaltzeiten;
 	
 	Switch mySwitch;
 	CheckBox aktivBox;
