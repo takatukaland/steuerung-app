@@ -15,22 +15,28 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.R.color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.GridLayout.LayoutParams;
+import android.widget.LinearLayout;
 //import android.view.ViewGroup.LayoutParams;
 import android.widget.Switch;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class MainActivity extends Activity {
 	public static ArrayList<Steuerungen> steuerungen = new ArrayList<Steuerungen>();
 	public static ArrayList<RelaySwitch> RelaySwitche = new ArrayList<RelaySwitch>();
+	public static ArrayList<ToggleButton> ToggleButtons = new ArrayList<ToggleButton>();
 	public static SQLiteOpenHelper database;
 	public static SQLiteDatabase connection;
 	
@@ -161,7 +167,22 @@ public class MainActivity extends Activity {
 					    
 					    //RelaySwitch tmpSwitch = new RelaySwitch(mContext, AktRelay);
 					    
-					    MainActivity.RelaySwitche.add(new RelaySwitch(mContext, AktRelay));
+					    //MainActivity.RelaySwitche.add(new RelaySwitch(mContext, AktRelay));
+					    LinearLayout linear = (LinearLayout)findViewById(R.id.AktiveRelays);
+					    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+					            LinearLayout.LayoutParams.MATCH_PARENT,
+					            LinearLayout.LayoutParams.WRAP_CONTENT);
+					    
+					    ToggleButton btn = new ToggleButton(mContext);
+					    //Button btn = new Button(mContext);
+					    
+					    btn.setId(AktSteuerung.id * 16 + AktRelay.relay);
+					    btn.setText(AktRelay.name);
+					    btn.setTextOn(AktRelay.name);
+					    btn.setTextOff(AktRelay.name);
+					    btn.setTextColor(Color.BLACK);
+					    linear.addView(btn, params);
+					    
 					    AktRelay.Update();
 				    
 				    } // Ende FOR Relays
