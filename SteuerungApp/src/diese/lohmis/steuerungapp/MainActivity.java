@@ -139,17 +139,17 @@ public class MainActivity extends Activity {
 				JSONObject jsonResponse = new JSONObject(jsonResult);
 				JSONArray jsSteuerungen = jsonResponse.optJSONArray("Steuerungen");
 				for (int i = 0; i < jsSteuerungen.length(); i++) {
-				    JSONObject jsonChildNode = jsSteuerungen.getJSONObject(i);
+				    JSONObject jsonChildNodeSteuerung = jsSteuerungen.getJSONObject(i);
 				    Steuerungen AktSteuerung = new Steuerungen();
-				    AktSteuerung.name = jsonChildNode.optString("name");
-				    AktSteuerung.id = jsonChildNode.optInt("id");
-				    AktSteuerung.ip = jsonChildNode.optString("ip");
-				    AktSteuerung.aktiv = jsonChildNode.optBoolean("aktiv");
-				    AktSteuerung.classname = jsonChildNode.optString("classname");
+				    AktSteuerung.name = jsonChildNodeSteuerung.optString("name");
+				    AktSteuerung.id = jsonChildNodeSteuerung.optInt("id");
+				    AktSteuerung.ip = jsonChildNodeSteuerung.optString("ip");
+				    AktSteuerung.aktiv = jsonChildNodeSteuerung.optBoolean("aktiv");
+				    AktSteuerung.classname = jsonChildNodeSteuerung.optString("classname");
 				    
 				    AktSteuerung.Update();
 				    
-				    JSONArray jsRelays= jsonChildNode.optJSONArray("relays");
+				    JSONArray jsRelays= jsonChildNodeSteuerung.optJSONArray("relays");
 					for (int iRelay = 0; iRelay < jsRelays.length(); iRelay++) {
 					    JSONObject jsonChildNodeRelay = jsRelays.getJSONObject(iRelay);
 					    Relays AktRelay = new Relays();
@@ -164,6 +164,17 @@ public class MainActivity extends Activity {
 
 					    AktRelay.name		= jsonChildNodeRelay.optString("name");
 					    AktRelay.classname	= jsonChildNodeRelay.optString("classname");
+					    
+					    JSONArray jsRelaySchaltzeiten= jsonChildNodeRelay.optJSONArray("relayschaltzeiten");
+						for (int iRelaySchaltzeit = 0; iRelaySchaltzeit < jsRelaySchaltzeiten.length(); iRelaySchaltzeit++) {
+							JSONObject jsonChildNodeRelaySchaltzeit = jsRelaySchaltzeiten.getJSONObject(iRelaySchaltzeit);
+							RelaySchaltzeiten AktRelaysSchaltzeit = new RelaySchaltzeiten();
+							
+							AktRelaysSchaltzeit.steuerung	= jsonChildNodeRelaySchaltzeit.optInt("steuerung");
+							AktRelaysSchaltzeit.relay		= jsonChildNodeRelaySchaltzeit.optInt("relay");
+							AktRelaysSchaltzeit.schaltzeit	= jsonChildNodeRelaySchaltzeit.optInt("steuerung");
+							AktRelaysSchaltzeit.aktiv		= jsonChildNodeRelaySchaltzeit.optBoolean("aktiv");
+						}
 					    
 					    //RelaySwitch tmpSwitch = new RelaySwitch(mContext, AktRelay);
 					    
