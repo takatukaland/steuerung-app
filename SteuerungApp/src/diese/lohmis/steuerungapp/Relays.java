@@ -28,13 +28,13 @@ public class Relays {
 		boolean rc = false;
 		ContentValues cv = new ContentValues();
 		cv.put("relay", this.relay);
-		cv.put("ausgang", this.ausgang);
-		cv.put("eingang", this.eingang);
-		cv.put("led", this.led);
-		cv.put("status", this.status);
-		cv.put("aktiv", this.aktiv);
-		cv.put("name", this.name);
-		cv.put("classname", this.classname);
+		//cv.put("ausgang", this.ausgang);
+		//cv.put("eingang", this.eingang);
+		//cv.put("led", this.led);
+		//cv.put("status", this.status);
+		//cv.put("aktiv", this.aktiv);
+		//cv.put("name", this.name);
+		//cv.put("classname", this.classname);
 		
 		MainActivity.connection.insertWithOnConflict(Relays.dbtable, null, cv, SQLiteDatabase.CONFLICT_REPLACE);
 		return rc;
