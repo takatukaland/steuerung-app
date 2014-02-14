@@ -13,11 +13,12 @@
 		</item>
 		<item>
 	        CREATE TABLE IF NOT EXISTS steuerungen (
-	  			id        integer primary key,
+	  			steuerung integer primary key,
 	  			classname text    NOT NULL,
 	  			name      text    NOT NULL,
 	  			ip        text    NOT NULL,
-	  			aktiv     integer NOT NULL DEFAULT 1
+	  			aktiv     integer NOT NULL DEFAULT 1,
+	  			PRIMARY KEY (steuerung)
 			)
 		</item>
         <item>
@@ -25,7 +26,6 @@
 		</item>
 		<item>
 	        CREATE TABLE IF NOT EXISTS relays (
-				steuerung integer,
 				relay     integer,
 				ausgang   integer NOT NULL,
 				eingang   integer NOT NULL,
@@ -33,33 +33,48 @@
 				status    integer NOT NULL DEFAULT 0,
 				aktiv     integer NOT NULL DEFAULT 1,
 				name      text    NOT NULL,
+				hauscode  text    NOT NULL,
 				classname text    NOT NULL,
-			FOREIGN KEY(steuerung) REFERENCES steuerungen(id),
-			PRIMARY KEY (steuerung, relay)
+			PRIMARY KEY (relay)
 			)
 		</item>
         <item>
 			CREATE TABLE IF NOT EXISTS schaltzeiten (
-				id      integer primary key,
-				type     integer NOT NULL DEFAULT 1,
-				modus    integer NOT NULL DEFAULT 0,            
-				zeit     time             DEFAULT NULL,         
-				zeitdiff time    NOT NULL DEFAULT \'00:00:00\', 
-				aktiv    integer NOT NULL DEFAULT 1
+				schaltzeit	integer primary key,
+				type     	integer NOT NULL DEFAULT 1,
+				modus    	integer NOT NULL DEFAULT 0,
+				monat    	integer NOT NULL DEFAULT 0,
+				tag	    	integer NOT NULL DEFAULT 0,
+				wochentag  	integer NOT NULL DEFAULT 0,            
+				zeit     	time             DEFAULT NULL,         
+				zeitdiff 	time    NOT NULL DEFAULT \'00:00:00\', 
+				aktiv    	integer NOT NULL DEFAULT 1,
+				name	 	text,
+				classname 	text    NOT NULL,
+				PRIMARY KEY (schaltzeit)
 			)
 		</item>
         <item>
 			CREATE TABLE IF NOT EXISTS relayschaltzeiten (
-				steuerung  integer,
 				relay      integer,
 				schaltzeit integer,
 				aktiv      integer NOT NULL DEFAULT 1,
-			FOREIGN KEY(steuerung, relay) REFERENCES relays(steuerung, relay),
+			FOREIGN KEY(relay) REFERENCES relays(relay),
 			FOREIGN KEY(schaltzeit) REFERENCES schaltzeiten(id),
-			PRIMARY KEY (steuerung, relay, schaltzeit)
+			PRIMARY KEY (relay, schaltzeit)
 			)
 		</item>
-    </string-array>
+         <item>
+			CREATE TABLE IF NOT EXISTS relaysteuerungen (
+				relay      	integer,
+				steuerung	integer,
+				aktiv      	integer NOT NULL DEFAULT 1,
+			FOREIGN KEY(relay) REFERENCES relays(relay),
+			FOREIGN KEY(steuerung) REFERENCES steuerungen(steuerung),
+			PRIMARY KEY (relay, steuerung)
+			)
+		</item>
+	   </string-array>
     <string name="version">1</string>
 
 </resources>

@@ -1,7 +1,7 @@
 package diese.lohmis.steuerungapp;
 
 public class Schaltzeiten {
-	int id;
+	int schaltzeit;
 	int type;
 	boolean modus;
 	int monat;
@@ -10,5 +10,6 @@ public class Schaltzeiten {
 	int zeit;
 	int zeitdiff;
 	boolean aktiv;
+	String classname;
 	String name;
 }

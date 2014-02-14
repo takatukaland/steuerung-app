@@ -6,7 +6,6 @@ import android.widget.CheckBox;
 import android.widget.Switch;
 
 public class Relays {
-	int steuerung;
 	int relay;
 	int ausgang;
 	int eingang;
@@ -14,8 +13,11 @@ public class Relays {
 	int status;
 	boolean aktiv;
 	String name;
+	String hauscode;
 	String classname;
 	RelaySchaltzeiten[] relayschaltzeiten;
+	RelaySteuerungen[] relaysteuerungen;
+	
 	
 	Switch mySwitch;
 	CheckBox aktivBox;
@@ -25,7 +27,6 @@ public class Relays {
 	public boolean Update(){
 		boolean rc = false;
 		ContentValues cv = new ContentValues();
-		cv.put("steuerung", this.steuerung);
 		cv.put("relay", this.relay);
 		cv.put("ausgang", this.ausgang);
 		cv.put("eingang", this.eingang);

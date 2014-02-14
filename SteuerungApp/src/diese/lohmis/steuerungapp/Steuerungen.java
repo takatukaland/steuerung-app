@@ -7,7 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class Steuerungen {
-	int id;
+	int steuerung;
 	String name;
 	String ip;
 	boolean aktiv;
@@ -30,7 +30,7 @@ public class Steuerungen {
 	    // 3. if we got results get the first one
 	    while(cursor.moveToNext ()){
 	    	aktSteuerung.name = cursor.getString(cursor.getColumnIndex("name"));
-	    	aktSteuerung.id = Integer.parseInt(cursor.getString(cursor.getColumnIndex("id")));
+	    	aktSteuerung.steuerung = Integer.parseInt(cursor.getString(cursor.getColumnIndex("steuerung")));
 	    	aktSteuerung.ip = cursor.getString(cursor.getColumnIndex("ip"));
 	    	aktSteuerung.aktiv = Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex("aktiv")));
 	    	aktSteuerung.classname = cursor.getString(cursor.getColumnIndex("classname"));

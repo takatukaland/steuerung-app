@@ -1,8 +1,7 @@
 package diese.lohmis.steuerungapp;
 
-public class RelaySchaltzeiten {
+public class RelaySteuerungen {
 	int relay;
-	int schaltzeit;
+	int steuerung;
 	boolean aktiv;
-	
 }
