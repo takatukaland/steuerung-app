@@ -142,7 +142,7 @@ public class MainActivity extends Activity {
 				    JSONObject jsonChildNodeSteuerung = jsSteuerungen.getJSONObject(i);
 				    Steuerungen AktSteuerung = new Steuerungen();
 				    AktSteuerung.name = jsonChildNodeSteuerung.optString("name");
-				    AktSteuerung.id = jsonChildNodeSteuerung.optInt("id");
+				    AktSteuerung.steuerung = jsonChildNodeSteuerung.optInt("steuerung");
 				    AktSteuerung.ip = jsonChildNodeSteuerung.optString("ip");
 				    AktSteuerung.aktiv = jsonChildNodeSteuerung.optBoolean("aktiv");
 				    AktSteuerung.classname = jsonChildNodeSteuerung.optString("classname");
@@ -153,7 +153,6 @@ public class MainActivity extends Activity {
 					for (int iRelay = 0; iRelay < jsRelays.length(); iRelay++) {
 					    JSONObject jsonChildNodeRelay = jsRelays.getJSONObject(iRelay);
 					    Relays AktRelay = new Relays();
-					    AktRelay.steuerung	= jsonChildNodeRelay.optInt("steuerung");
 					    AktRelay.relay		= jsonChildNodeRelay.optInt("relay");
 					    AktRelay.ausgang	= jsonChildNodeRelay.optInt("ausgang");
 					    AktRelay.eingang	= jsonChildNodeRelay.optInt("eingang");
@@ -170,7 +169,6 @@ public class MainActivity extends Activity {
 							JSONObject jsonChildNodeRelaySchaltzeit = jsRelaySchaltzeiten.getJSONObject(iRelaySchaltzeit);
 							RelaySchaltzeiten AktRelaysSchaltzeit = new RelaySchaltzeiten();
 							
-							AktRelaysSchaltzeit.steuerung	= jsonChildNodeRelaySchaltzeit.optInt("steuerung");
 							AktRelaysSchaltzeit.relay		= jsonChildNodeRelaySchaltzeit.optInt("relay");
 							AktRelaysSchaltzeit.schaltzeit	= jsonChildNodeRelaySchaltzeit.optInt("steuerung");
 							AktRelaysSchaltzeit.aktiv		= jsonChildNodeRelaySchaltzeit.optBoolean("aktiv");
@@ -187,7 +185,7 @@ public class MainActivity extends Activity {
 					    ToggleButton btn = new ToggleButton(mContext);
 					    //Button btn = new Button(mContext);
 					    
-					    btn.setId(AktSteuerung.id * 16 + AktRelay.relay);
+					    btn.setId(AktSteuerung.steuerung * 16 + AktRelay.relay);
 					    btn.setText(AktRelay.name);
 					    btn.setTextOn(AktRelay.name);
 					    btn.setTextOff(AktRelay.name);

@@ -17,8 +17,7 @@
 	  			classname text    NOT NULL,
 	  			name      text    NOT NULL,
 	  			ip        text    NOT NULL,
-	  			aktiv     integer NOT NULL DEFAULT 1,
-	  			PRIMARY KEY (steuerung)
+	  			aktiv     integer NOT NULL DEFAULT 1
 			)
 		</item>
         <item>
@@ -26,7 +25,7 @@
 		</item>
 		<item>
 	        CREATE TABLE IF NOT EXISTS relays (
-				relay     integer,
+				relay     integer primary key,
 				ausgang   integer NOT NULL,
 				eingang   integer NOT NULL,
 				led       integer NOT NULL,
@@ -34,8 +33,7 @@
 				aktiv     integer NOT NULL DEFAULT 1,
 				name      text    NOT NULL,
 				hauscode  text    NOT NULL,
-				classname text    NOT NULL,
-			PRIMARY KEY (relay)
+				classname text    NOT NULL
 			)
 		</item>
         <item>
@@ -50,8 +48,7 @@
 				zeitdiff 	time    NOT NULL DEFAULT \'00:00:00\', 
 				aktiv    	integer NOT NULL DEFAULT 1,
 				name	 	text,
-				classname 	text    NOT NULL,
-				PRIMARY KEY (schaltzeit)
+				classname 	text    NOT NULL
 			)
 		</item>
         <item>

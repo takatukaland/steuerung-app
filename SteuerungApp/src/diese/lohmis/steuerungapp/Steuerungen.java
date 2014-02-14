@@ -42,7 +42,7 @@ public class Steuerungen {
 	public boolean Update(){
 		boolean rc = false;
 		ContentValues cv = new ContentValues();
-		cv.put("id", this.id);
+		cv.put("steuerung", this.steuerung);
 		cv.put("name", this.name);
 		cv.put("ip", this.ip);
 		cv.put("aktiv", this.aktiv);
